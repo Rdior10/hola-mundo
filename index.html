@@ -1,8 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de tareas</title>
+</head>
+<body>
+
+<h1>Mis tareas</h1>
+
+<input type="text" id="tareaInput" placeholder="Escribe una tarea">
+<button onclick="agregarTarea()">Agregar</button>
+
+<ul id="listaTareas"></ul>
+
 <script type="module">
+  // 🔹 Importes correctos para navegador (GitHub Pages)
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getFirestore, collection, addDoc, onSnapshot }
     from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+  // 🔹 Tu configuración real de Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyDehoBuFn6t8bHyFWiIB56f86ULFl42ykY",
     authDomain: "tareas-app-dc2a8.firebaseapp.com",
@@ -12,27 +29,10 @@
     appId: "1:70071004379:web:39638e7e91fade9ea670fe"
   };
 
+  // 🔹 Inicializar Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  window.agregarTarea = async () => {
-    const texto = document.getElementById("tareaInput").value;
-    if (texto === "") return;
+  // 🔹 Función para agregar tareas
+  window.agregarTarea =
 
-    await addDoc(collection(db, "tareas"), {
-      nombre: texto
-    });
-
-    document.getElementById("tareaInput").value = "";
-  };
-
-  onSnapshot(collection(db, "tareas"), (snapshot) => {
-    const lista = document.getElementById("listaTareas");
-    lista.innerHTML = "";
-    snapshot.forEach(doc => {
-      const li = document.createElement("li");
-      li.textContent = doc.data().nombre;
-      lista.appendChild(li);
-    });
-  });
-</script>
