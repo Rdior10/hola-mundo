@@ -22,44 +22,6 @@
     onSnapshot
   } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+  // Configuración de Firebase
   const firebaseConfig = {
-    apiKey: "AIzaSyDehoBuFn6t8bHyFWiIB56f86ULFl42ykY",
-    authDomain: "tareas-app-dc2a8.firebaseapp.com",
-    projectId: "tareas-app-dc2a8",
-    storageBucket: "tareas-app-dc2a8.appspot.com",
-    messagingSenderId: "70071004379",
-    appId: "1:70071004379:web:39638e7e91fade9ea670fe"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  const input = document.getElementById("tareaInput");
-  const boton = document.getElementById("btnAgregar");
-  const lista = document.getElementById("listaTareas");
-
-  // 👉 Evento del botón (FORMA CORRECTA)
-  boton.addEventListener("click", async () => {
-    const texto = input.value.trim();
-    if (texto === "") return;
-
-    await addDoc(collection(db, "tareas"), {
-      nombre: texto
-    });
-
-    input.value = "";
-  });
-
-  // 👉 Mostrar tareas en tiempo real
-  onSnapshot(collection(db, "tareas"), (snapshot) => {
-    lista.innerHTML = "";
-    snapshot.forEach(doc => {
-      const li = document.createElement("li");
-      li.textContent = doc.data().nombre;
-      lista.appendChild(li);
-    });
-  });
-</script>
-
-</body>
-</html>
+    apiKey: "AI
